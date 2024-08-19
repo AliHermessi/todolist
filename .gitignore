@@ -1,0 +1,25 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore Angular build output
+dist/
+out-tsc/
+.build/
+
+# Ignore environment files
+src/environments/
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore any other sensitive files
+*.env

@@ -1,0 +1,62 @@
+<div>
+  <form (ngSubmit)="addTodo()" class="flex items-center space-x-4 mb-8">
+    <input 
+      [(ngModel)]="newTodoTitle" 
+      name="title" 
+      placeholder="Title" 
+      required 
+      class="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-1"
+    />
+    <input 
+      [(ngModel)]="newTodoDate" 
+      name="date" 
+      type="date" 
+      required 
+      class="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-32"
+    />
+    <button 
+      type="submit" 
+      class="px-4 py-2 bg-blue-500 text-white font-semibold rounded shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      Add
+    </button>
+    <button 
+      type="button" 
+      (click)="resetForm()" 
+      class="p-2 bg-gray-200 text-gray-700 rounded shadow hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </form>
+
+  <ul class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Uncompleted To-Dos</h2>
+
+    <li *ngFor="let todo of todos; let i = index" 
+        class="flex items-center justify-between p-4 border border-gray-300 rounded shadow-sm bg-gray-50 transform transition-transform duration-200 ease-in-out hover:scale-105 ">
+      <span class="flex items-center space-x-2">
+        <span>{{ todo.title }} - {{ todo.date | date: 'MMM d, y' }}</span>
+      </span>
+      <div>
+        <button 
+          (click)="completeTodo(i)" 
+          class="px-3 py-1 text-green-600 hover:bg-green-100 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </button>
+        <button 
+          (click)="deleteTodo(i)" 
+          class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
