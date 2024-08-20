@@ -17,11 +17,19 @@ export class TodosComponent {
   }
 
   addTodo() {
-    if (this.newTodoTitle && this.newTodoDate) {
-      this.todoService.addTodo(this.newTodoTitle, this.newTodoDate);
-      this.newTodoTitle = '';
-      this.newTodoDate = '';
+    if (!this.newTodoTitle.trim() || !this.newTodoDate) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Both title and date fields are required.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
     }
+
+    this.todoService.addTodo(this.newTodoTitle, this.newTodoDate);
+    this.newTodoTitle = '';
+    this.newTodoDate = '';
   }
 
   deleteTodo(index: number) {
@@ -44,8 +52,16 @@ export class TodosComponent {
     this.todoService.completeTodo(index);
   }
 
-  resetForm(){
+  resetForm() {
     this.newTodoTitle = '';
     this.newTodoDate = '';
   }
+
+  isDatePast(date: string): boolean {
+    const todoDate = new Date(date);
+    const now = new Date();
+    return todoDate < now;
+  }
+  
+
 }
